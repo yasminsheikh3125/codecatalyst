@@ -8,15 +8,34 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at top, #1e293b, #020617);
       color: white;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 40px;
+      background: #020617;
+      overflow: hidden;
+    }
+
+    /* VANTA BACKGROUND */
+    #vanta-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+    }
+
+    .page-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(30,41,59,0.85), rgba(2,6,23,0.9));
+      z-index: -1;
     }
 
     .container {
@@ -154,6 +173,10 @@
 
 <body>
 
+  <!-- VANTA BACKGROUND -->
+  <div id="vanta-bg"></div>
+  <div class="page-overlay"></div>
+
   <div class="container">
     <div class="header">
       <h2>AI Report Simplifier</h2>
@@ -183,7 +206,25 @@
     </div>
   </div>
 
-  <!-- 🔒 FUNCTIONALITY CODE UNCHANGED -->
+  <!-- VANTA SCRIPTS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+
+  <script>
+    VANTA.NET({
+      el: "#vanta-bg",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      color: 0x38bdf8,
+      backgroundColor: 0x020617,
+      points: 9.0,
+      maxDistance: 20.0,
+      spacing: 18.0
+    });
+  </script>
+
+  <!-- FUNCTIONALITY (UNCHANGED) -->
   <script>
     function simplify() {
       const text = document.getElementById("reportInput").value.toLowerCase();
